@@ -140,7 +140,7 @@ pip install -r requirements.txt
 ## How to Run
 
 1. Clone the repository and place `WELFake_Dataset.csv` in the root directory.
-2. Open `main_notebook.ipynb` in Jupyter or Google Colab.
+2. Open `main_notebook.ipynb` in Jupyter or Google Colab, **Python version: Python 3.12.13**.
 3. Run all cells top to bottom — EDA, feature engineering, training, and evaluation are all self-contained.
 
 ---

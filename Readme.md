@@ -1,35 +1,113 @@
 # Trust-Aware Fake News Detection using Semantic and Stylistic Features
 
-A deep learning pipeline for fake news classification that combines **transformer-based semantic embeddings** with **handcrafted stylistic features** — capturing not just *what* an article says, but *how* it is written.
+Fake news spreads rapidly online and can influence public opinion, decisions, and real-world events. At scale, manual fact-checking is simply not feasible. Most existing detection systems focus only on **what is written** — the semantic meaning of the text. This project goes further by asking: does the **way** fake news is written also give it away? We build a hybrid deep learning pipeline that combines **DistilBERT semantic embeddings** with **7 handcrafted stylistic features** (sentiment, readability, punctuation patterns, capitalization, and lexical diversity) in a late-fusion architecture. The result is a model that understands both the *content* and the *writing behavior* of an article — and the results confirm that combining both signals meaningfully outperforms using semantics alone.
 
 ---
 
-##  Research Question
+## Project Video
 
-> **Does combining semantic embeddings with stylistic features improve fake news detection compared to using semantic features alone?**
+>  **[Watch the project walkthrough here](#https://youtu.be/OlQ9bhyapuk?si=dt9_oNR_eyZy3HIa)**
 
-**Answer: Yes.** Our fusion model achieves **99.17% accuracy** and a **99.08% F1 score**, outperforming a standard TF-IDF baseline (~95%) by over 4 percentage points across all metrics.
 
 ---
 
-## Project Structure
+## Main Deliverable
+
+The main deliverable is **`main_notebook.ipynb`** — it contains the full pipeline end-to-end: EDA, feature engineering, model architecture, training, evaluation, and results.
+
+---
+
+## Research Question
+
+> **How do semantic representations (DistilBERT) compare with stylistic features in fake news detection, and does combining both lead to more accurate and interpretable predictions?**
+
+Specifically, I investigated whether:
+- **Semantic features** capture *meaning* (via DistilBERT `[CLS]` embeddings)
+- **Stylistic features** capture *writing behavior* (sentiment, readability, punctuation, caps, lexical diversity)
+- **Combining both** improves classification performance over either alone
+
+---
+
+## Results Summary
+
+Our fusion model achieves **99.17% accuracy** and a **99.08% F1 score** on the held-out test set — outperforming the semantic-only baseline by over **4 percentage points** across every metric, confirming that writing style is a meaningful and measurable signal for fake news detection.
+
+| Metric | Baseline (TF-IDF + Logistic Regression) | Ours (DistilBERT + Stylistic Fusion) |
+|---|---|---|
+| Accuracy | ~95.00% | **99.17%** |
+| Precision | ~95.00% | **98.99%** |
+| Recall | ~95.00% | **99.17%** |
+| F1 Score | ~95.00% | **99.08%** |
+
+---
+
+## Repo Structure
 
 ```
-├── main_notebook.ipynb   # Full pipeline: EDA → Feature Engineering → Model → Evaluation
-├── WELFake_Dataset.csv       # Dataset (see Dataset section below)
+├── main_notebook.ipynb        # 👈 Main deliverable — full pipeline
+├── WELFake_Dataset.csv        # Dataset (download link below — not included due to size)
+├── requirements.txt           # Full list of pinned dependencies
 └── README.md
 ```
 
 ---
 
-## Dataset
+## 📦 Dataset
 
 **WELFake Dataset**
-- A widely used benchmark for fake news detection containing news articles with title, body text, and binary labels.
+- 72,134 news articles combining multiple prior fake-news sources to reduce overfitting to a single distribution
+- **4 columns:** serial number, title, text, label
 - **Label convention used in this project:** `0 = Real`, `1 = Fake`
-- Input features used: article title + body text (combined), no images or URLs.
+- **Download:** [https://zenodo.org/records/4561253](https://zenodo.org/records/4561253)
+
+### Preprocessing Steps
+1. Standardized column names; dropped missing and duplicate rows
+2. Combined **title + body text** into a single `combined_text` field
+3. Extracted 7 stylistic features per article using TextBlob and textstat
+4. Applied `StandardScaler` normalization to all stylistic features
+5. Tokenized text with the DistilBERT tokenizer (max length 128, padding + truncation)
+6. Stratified 80/20 train/validation split (`random_state=42`)
+
+> ⚠️ The dataset CSV is not included in this repo due to file size. Download it from the Zenodo link above and place it in the root directory as `WELFake_Dataset.csv` before running.
 
 ---
+
+## 🔁 How to Reproduce
+
+This project was built and run on **Google Colab** with a GPU runtime (recommended).
+
+1. Clone this repository
+2. Download `WELFake_Dataset.csv` from [Zenodo](https://zenodo.org/records/4561253) and place it in the root folder
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Open **`main_notebook.ipynb`** in Colab or Jupyter and **run all cells top to bottom** — the notebook is fully self-contained with no separate scripts to run
+
+> 💡 In Colab: go to **Runtime → Change runtime type → T4 GPU** before running for significantly faster DistilBERT training.
+
+---
+
+## 🛠️ Key Dependencies
+
+| Package | Version |
+|---|---|
+| Python | 3.12.13 |
+| torch | 2.2.0 |
+| transformers | 4.x |
+| scikit-learn | 1.4.1 |
+| pandas | 2.2.0 |
+| numpy | 1.26.x |
+| textblob | 0.19.0 |
+| textstat | 0.7.13 |
+| seaborn | 0.13.x |
+| matplotlib | 3.8.x |
+
+> The full pinned list of every package is in **`requirements.txt`**.
+
+
+---
+
 
 ## Pipeline Overview
 
@@ -127,23 +205,6 @@ The natural next step is a **multimodal fake news detector** that extends this l
 
 ---
 
-## Requirements
-
-```bash
-pip install -r requirements.txt
-```
-
-> Recommended: Run on **Google Colab** with GPU runtime for faster DistilBERT fine-tuning.
-
----
-
-## How to Run
-
-1. Clone the repository and place `WELFake_Dataset.csv` in the root directory.
-2. Open `main_notebook.ipynb` in Jupyter or Google Colab, **Python version: Python 3.12.13**.
-3. Run all cells top to bottom — EDA, feature engineering, training, and evaluation are all self-contained.
-
----
 
 ## Key References
 

@@ -15,7 +15,7 @@ A deep learning pipeline for fake news classification that combines **transforme
 ## Project Structure
 
 ```
-├── Data_Mining_final.ipynb   # Full pipeline: EDA → Feature Engineering → Model → Evaluation
+├── main_notebook.ipynb   # Full pipeline: EDA → Feature Engineering → Model → Evaluation
 ├── WELFake_Dataset.csv       # Dataset (see Dataset section below)
 └── README.md
 ```

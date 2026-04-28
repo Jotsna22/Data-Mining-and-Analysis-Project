@@ -6,7 +6,7 @@ Fake news spreads rapidly online and can influence public opinion, decisions, an
 
 ## Project Video
 
->  **[Watch the project walkthrough here](#https://youtu.be/OlQ9bhyapuk?si=dt9_oNR_eyZy3HIa)**
+>  **[Watch the project walkthrough here](https://youtu.be/OlQ9bhyapuk?si=dt9_oNR_eyZy3HIa)**
 
 
 ---

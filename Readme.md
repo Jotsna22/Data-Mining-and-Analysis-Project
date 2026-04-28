@@ -1,10 +1,10 @@
-# 🕵️ Fake News Detection with DistilBERT + Stylistic Feature Fusion
+# Trust-Aware Fake News Detection using Semantic and Stylistic Features
 
 A deep learning pipeline for fake news classification that combines **transformer-based semantic embeddings** with **handcrafted stylistic features** — capturing not just *what* an article says, but *how* it is written.
 
 ---
 
-## 📌 Research Question
+##  Research Question
 
 > **Does combining semantic embeddings with stylistic features improve fake news detection compared to using semantic features alone?**
 
@@ -12,7 +12,7 @@ A deep learning pipeline for fake news classification that combines **transforme
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 ├── Data_Mining_final.ipynb   # Full pipeline: EDA → Feature Engineering → Model → Evaluation
@@ -22,7 +22,7 @@ A deep learning pipeline for fake news classification that combines **transforme
 
 ---
 
-## 📦 Dataset
+## Dataset
 
 **WELFake Dataset**
 - A widely used benchmark for fake news detection containing news articles with title, body text, and binary labels.
@@ -31,7 +31,7 @@ A deep learning pipeline for fake news classification that combines **transforme
 
 ---
 
-## 🔧 Pipeline Overview
+## Pipeline Overview
 
 ### 1. Exploratory Data Analysis
 - Class distribution check
@@ -98,7 +98,7 @@ During inference, dropout is kept active and the model runs **T = 10** forward p
 
 ---
 
-## 📊 Results
+## Results
 
 | Metric | Baseline (TF-IDF + LR) | Our Model (DistilBERT + Fusion) |
 |---|---|---|
@@ -109,7 +109,7 @@ During inference, dropout is kept active and the model runs **T = 10** forward p
 
 ---
 
-## ⚠️ Limitations
+## Limitations
 
 - **Text-only:** The model does not process images or URLs, both of which are important vectors for misinformation.
 - **Static dataset:** Performance may degrade on newer fake news styles without retraining.
@@ -117,7 +117,7 @@ During inference, dropout is kept active and the model runs **T = 10** forward p
 
 ---
 
-## 🔭 Future Work
+## Future Work
 
 The natural next step is a **multimodal fake news detector** that extends this late fusion design with:
 
@@ -127,7 +127,7 @@ The natural next step is a **multimodal fake news detector** that extends this l
 
 ---
 
-## 🛠️ Requirements
+## Requirements
 
 ```bash
 pip install -r requirements.txt
@@ -137,7 +137,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 1. Clone the repository and place `WELFake_Dataset.csv` in the root directory.
 2. Open `main_notebook.ipynb` in Jupyter or Google Colab.
@@ -145,7 +145,7 @@ pip install -r requirements.txt
 
 ---
 
-## 📚 Key References
+## Key References
 
 - Devlin et al. (2019) — *BERT: Pre-training of Deep Bidirectional Transformers*
 - Sanh et al. (2019) — *DistilBERT, a distilled version of BERT*
